@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: nodejs8.10
   environment:
-    POSTGRES_URL: 'postgres://dyjryrzj:G8IrVdEDMYJ3-Ix3xdnzpGUw-oVs9dCJ@baasu.db.elephantsql.com:5432/dyjryrzj'
+    POSTGRES_URL: '!!!!SEE EMAIL!!!!'
 functions:
   graphql:
     handler: handler.test
