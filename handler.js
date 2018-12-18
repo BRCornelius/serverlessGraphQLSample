@@ -37,9 +37,7 @@ var schema = new GraphQLSchema({
         type: UserType,
             resolve: (obj, args, context, info)=> {
                 console.log('resolving')
-                db.any(`SELECT * FROM users`)
-                .then(result=>{pgp.end();console.log("result 1", result);return result})
-                .catch(err=>console.log(err));     
+                return db.any(`SELECT * FROM users`).then(([results])=>results) 
             }
       }
     }
@@ -49,15 +47,11 @@ var schema = new GraphQLSchema({
   var query = '{ users {email} }';
  
  module.exports.test = async (event, context, callback)=>{
-    
-    context.callbackWaitsForEmptyEventLoop = true;
+    // context.callbackWaitsForEmptyEventLoop = true;
     graphql(schema, query)
     .then(result => {
         console.log("export", result);
-        callback(null, {
-            statusCode: 200,
-            body: JSON.stringify(result)
-        })
+        callback("Danger Will Robinson", {statusCode: 200, body: JSON.stringify(result)})
     })
     .catch(error=>console.log(error));
  }
